@@ -5,11 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script async defer src="script.js"></script>
 </head>
 
 <body>
-    
+    <div class="container">
+        <h1 align="center">Todo List</h1>
+        
+        <div class="row">
+
+            <!-- input area -->
+
+            <div class="col-md-8">
+                <div class="mb-3">
+                    <label for="inpNewTask" class="form-label">New Task</label>
+                    <input type="text" class="form-control" id="inpNewTask" aria-describedby="newTaskHelp" placeholder="Enter your task" autofocus>
+                    <div id="newTaskHelp" class="form-text">A short description of your task.</div>
+                  </div>
+            </div>
+
+            <!-- buttons --> 
+
+            <div class="col-md-4">
+                <div class="row">
+                    <button class="btn btn-success col m-2" id="btnAdd"><i class="fas fa-plus"></i> Add</button>
+                    <button class="btn btn-danger col m-2" id="btnReset"><i class="fas fa-backspace"></i> Reset</button>
+                </div>
+                
+                <div class="row">
+                    <button class="btn btn-info col m-2" id="btnSort"><i class="fas fa-sort"></i> Sort</button>
+                    <button class="btn btn-warning col m-2" id="btnCleanup"><i class="fas fa-trash"></i> Cleanup</button>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- task list -->
+        <ul class="row list-group m-2" id="ulTasks">
+            
+          </ul>
+    </div>
 </body>
 </html>
