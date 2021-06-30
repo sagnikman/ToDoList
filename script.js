@@ -11,10 +11,21 @@ function addItem() {
         'class': 'list-group-item', 
         text: inpNewTask.val()  
     })
-    listItem.click(() => {
+
+    listItem.click((e) => {
         listItem.toggleClass('done');
+        let state="1";
+        if(localStorage.getItem(e.target.innerText)!=null) {
+            if(localStorage.getItem(e.target.innerText)=="1") state="0";
+            else state="1"
+        }
+        localStorage.setItem(e.target.innerText,state);
     }) 
+    
+
+    localStorage.setItem(listItem[0].innerText,"0");
     ulTasks.append(listItem);
+ 
     inpNewTask.val("")
     inpNewTask.prop('autofocus',true);
     toggleInputButtons()
@@ -26,6 +37,14 @@ inpNewTask.keypress((e) =>  {
 })
 
 function clearDone() {
+
+    for (let i = 0; i < localStorage.length; i++){
+        let currentState=localStorage.getItem(localStorage.key(i));
+        if(currentState=="1") {
+            localStorage.removeItem(localStorage.key(i));  
+        }
+        
+    }
     $('#ulTasks .done').remove();
     toggleInputButtons()
 }
@@ -49,8 +68,47 @@ btnReset.click(() =>{ inpNewTask.val("")
 toggleInputButtons()
 })
 
-
-
 btnCleanup.click(clearDone);
 
 btnSort.click(sortTasks);
+
+
+function getTodos() {
+    for (let i = 0; i < localStorage.length; i++){
+        let currentState=localStorage.getItem(localStorage.key(i));
+        let listItem;
+        if(currentState=="0") {
+            listItem = $('<li>', {
+                'class': 'list-group-item', 
+                text: localStorage.key(i) 
+            })
+            
+        }
+        else {
+            listItem = $('<li>', {
+                'class': 'list-group-item done', 
+                text: localStorage.key(i) 
+            })
+            
+        }
+        
+        listItem.click((e) => {
+            listItem.toggleClass('done');
+            let state="1";
+            if(localStorage.getItem(e.target.innerText)!=null) {
+                if(localStorage.getItem(e.target.innerText)=="1") state="0";
+                else state="1"
+            }
+            localStorage.setItem(e.target.innerText,state);
+        }) 
+
+        ulTasks.append(listItem);
+
+    }
+    inpNewTask.val("")
+    inpNewTask.prop('autofocus',true);
+    toggleInputButtons()
+}
+
+getTodos();
+
