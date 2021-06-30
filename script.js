@@ -38,13 +38,15 @@ inpNewTask.keypress((e) =>  {
 
 function clearDone() {
 
-    for (let i = 0; i < localStorage.length; i++){
-        let currentState=localStorage.getItem(localStorage.key(i));
-        if(currentState=="1") {
-            localStorage.removeItem(localStorage.key(i));  
+    Object.keys(localStorage).forEach((key) => {
+        let listText=key;
+        let currentState=localStorage.getItem(key);
+        if(currentState==="1") {
+            localStorage.removeItem(listText);  
         }
-        
-    }
+       });
+
+    
     $('#ulTasks .done').remove();
     toggleInputButtons()
 }
@@ -74,24 +76,28 @@ btnSort.click(sortTasks);
 
 
 function getTodos() {
-    for (let i = 0; i < localStorage.length; i++){
-        let currentState=localStorage.getItem(localStorage.key(i));
+
+    Object.keys(localStorage).forEach((key) => {
+    
+        let listText=key;
+        let currentState=localStorage.getItem(key);
+
         let listItem;
         if(currentState=="0") {
             listItem = $('<li>', {
                 'class': 'list-group-item', 
-                text: localStorage.key(i) 
+                text: listText 
             })
             
         }
         else {
             listItem = $('<li>', {
                 'class': 'list-group-item done', 
-                text: localStorage.key(i) 
+                text: listText 
             })
             
         }
-        
+
         listItem.click((e) => {
             listItem.toggleClass('done');
             let state="1";
@@ -104,7 +110,10 @@ function getTodos() {
 
         ulTasks.append(listItem);
 
-    }
+        
+       });
+
+    
     inpNewTask.val("")
     inpNewTask.prop('autofocus',true);
     toggleInputButtons()
